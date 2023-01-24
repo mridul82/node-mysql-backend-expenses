@@ -28,4 +28,19 @@ exports.create = (req, res) => {
             });
         else res.send(data);
     });
+
+ 
+};
+
+exports.findAll = (req, res) => {
+    const category = req.body.category;
+
+    Expenses.getAll(category, (err, data) => {
+        if(err)
+            res.status(500).send({
+                message:
+                    err.message || "Error"
+            });
+        else res.send(data);
+    });
 };

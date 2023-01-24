@@ -24,4 +24,22 @@ Expenses.create = (newExpense, result) => {
     });
 };
 
+Expenses.getAll = (category, result) => {
+    let query = "SELECT * FROM expenses";
+    if(category) {
+        query += ` WHERE category LIKE '%${category}%'`;
+    }
+
+    sql.query(query, (err, res) => {
+        if(err) {
+            console.log("Error: ", err);
+            result(null, err);
+            return;
+        }
+
+        console.log("Expenses are: ", res);
+        result(null, res);
+    })
+}
+
 module.exports = Expenses;
